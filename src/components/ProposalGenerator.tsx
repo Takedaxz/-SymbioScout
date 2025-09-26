@@ -106,18 +106,18 @@ export default function ProposalGenerator({ site, plantingPlan, impactMetrics }:
   if (!showPreview) {
     return (
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Generate Community Proposal</h2>
-          <p className="text-gray-600 text-xl">Create a professional proposal to present to community groups and city officials</p>
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Generate Community Proposal</h2>
+          <p className="text-gray-600 text-base sm:text-lg lg:text-xl">Create a professional proposal to present to community groups and city officials</p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-2xl p-12">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 lg:p-12">
           <div className="text-center">
-            <div className="w-24 h-24 bg-green-100 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
-              <span className="text-5xl font-bold text-green-600">P</span>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-green-100 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 shadow-xl">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">P</span>
             </div>
-            <h3 className="text-3xl font-semibold text-gray-900 mb-4">Ready to Generate Your Proposal</h3>
-            <p className="text-gray-600 mb-10 text-xl leading-relaxed max-w-2xl mx-auto">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-3 sm:mb-4">Ready to Generate Your Proposal</h3>
+            <p className="text-gray-600 mb-6 sm:mb-8 lg:mb-10 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto">
               We'll create a comprehensive proposal including project details, environmental benefits,
               and implementation steps that you can share with stakeholders.
             </p>
@@ -125,15 +125,15 @@ export default function ProposalGenerator({ site, plantingPlan, impactMetrics }:
             <button
               onClick={generateProposal}
               disabled={isGenerating}
-              className="btn-primary py-5 px-12 text-2xl"
+              className="btn-primary py-3 px-6 sm:py-4 sm:px-8 lg:py-5 lg:px-12 text-base sm:text-lg lg:text-2xl w-full sm:w-auto"
             >
               {isGenerating ? (
-                <div className="flex items-center">
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
-                  Generating...
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 border-b-2 border-white mr-2 sm:mr-3"></div>
+                  <span className="text-sm sm:text-base lg:text-lg">Generating...</span>
                 </div>
               ) : (
-                'Generate Proposal'
+                <span className="text-sm sm:text-base lg:text-lg">Generate Proposal</span>
               )}
             </button>
           </div>
@@ -144,38 +144,40 @@ export default function ProposalGenerator({ site, plantingPlan, impactMetrics }:
 
   return (
     <div className="max-w-5xl mx-auto">
-      <div className="flex justify-between items-center mb-10">
-        <h2 className="text-4xl font-bold text-gray-900">Community Proposal</h2>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-10 space-y-4 sm:space-y-0">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Community Proposal</h2>
         <button
           onClick={downloadPDF}
-          className="btn-secondary py-4 px-8 text-lg"
+          className="btn-secondary py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg w-full sm:w-auto"
         >
           Download PDF
         </button>
       </div>
 
-      <div id="proposal-preview" className="bg-white rounded-3xl shadow-2xl p-12">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">{proposal.title}</h1>
-          <div className="flex items-center justify-center space-x-4 text-base text-gray-600">
+      <div id="proposal-preview" className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 lg:p-12">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">{proposal.title}</h1>
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm sm:text-base text-gray-600">
             <span>{site.name}</span>
+            <span className="hidden sm:inline">•</span>
             <span>{new Date().toLocaleDateString()}</span>
+            <span className="hidden sm:inline">•</span>
             <span>Bangkok, Thailand</span>
           </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Project Overview</h2>
-            <div className="text-gray-700 leading-relaxed text-base">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Project Overview</h2>
+            <div className="text-gray-700 leading-relaxed text-sm sm:text-base">
               <ReactMarkdown>{proposal.introduction}</ReactMarkdown>
             </div>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Site Details</h2>
-            <div className="bg-gray-50 rounded-lg p-6 shadow-sm">
-              <div className="grid grid-cols-2 gap-6 text-base">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Site Details</h2>
+            <div className="bg-gray-50 rounded-lg p-4 sm:p-6 shadow-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-sm sm:text-base">
                 <div>
                   <span className="font-medium text-gray-600">Location:</span>
                   <span className="ml-2 text-gray-800 font-medium">{site.name}</span>
@@ -197,72 +199,72 @@ export default function ProposalGenerator({ site, plantingPlan, impactMetrics }:
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Proposed Plant Plan</h2>
-            <div className="space-y-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Proposed Plant Plan</h2>
+            <div className="space-y-3 sm:space-y-4">
               {plantingPlan.plants.map(({ plant, quantity }) => (
-                <div key={plant.id} className="flex justify-between items-center p-4 bg-green-50 rounded-lg shadow-sm">
+                <div key={plant.id} className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 sm:p-4 bg-green-50 rounded-lg shadow-sm space-y-1 sm:space-y-0">
                   <div>
-                    <span className="font-medium text-gray-900 text-base">{plant.name}</span>
-                    <span className="text-sm text-gray-600 ml-2">({plant.scientificName})</span>
+                    <span className="font-medium text-gray-900 text-sm sm:text-base">{plant.name}</span>
+                    <span className="text-xs sm:text-sm text-gray-600 ml-2">({plant.scientificName})</span>
                   </div>
-                  <span className="font-semibold text-green-600 text-base">{quantity} plants</span>
+                  <span className="font-semibold text-green-600 text-sm sm:text-base">{quantity} plants</span>
                 </div>
               ))}
             </div>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Environmental Benefits</h2>
-            <div className="grid grid-cols-3 gap-6 mb-6">
-              <div className="text-center p-6 bg-blue-50 rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-blue-600">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Environmental Benefits</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
+              <div className="text-center p-4 sm:p-6 bg-blue-50 rounded-lg shadow-sm">
+                <div className="text-xl sm:text-2xl font-bold text-blue-600">
                   {impactMetrics.stormwaterReduction.litersPerYear.toLocaleString()}L
                 </div>
-                <div className="text-sm text-gray-600 mt-1">Stormwater Reduction</div>
+                <div className="text-xs sm:text-sm text-gray-600 mt-1">Stormwater Reduction</div>
               </div>
-              <div className="text-center p-6 bg-green-50 rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-green-600">
+              <div className="text-center p-4 sm:p-6 bg-green-50 rounded-lg shadow-sm">
+                <div className="text-xl sm:text-2xl font-bold text-green-600">
                   {impactMetrics.co2Sequestration.kgPerYear}kg
                 </div>
-                <div className="text-sm text-gray-600 mt-1">CO₂ Sequestration</div>
+                <div className="text-xs sm:text-sm text-gray-600 mt-1">CO₂ Sequestration</div>
               </div>
-              <div className="text-center p-6 bg-purple-50 rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-purple-600">
+              <div className="text-center p-4 sm:p-6 bg-purple-50 rounded-lg shadow-sm">
+                <div className="text-xl sm:text-2xl font-bold text-purple-600">
                   {impactMetrics.biodiversitySupport.pollinatorSpecies}
                 </div>
-                <div className="text-sm text-gray-600 mt-1">Pollinator Species</div>
+                <div className="text-xs sm:text-sm text-gray-600 mt-1">Pollinator Species</div>
               </div>
             </div>
-            <div className="text-gray-700 leading-relaxed text-base">
+            <div className="text-gray-700 leading-relaxed text-sm sm:text-base">
               <ReactMarkdown>{proposal.benefits}</ReactMarkdown>
             </div>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Implementation Plan</h2>
-            <div className="text-gray-700 leading-relaxed text-base">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Implementation Plan</h2>
+            <div className="text-gray-700 leading-relaxed text-sm sm:text-base">
               <ReactMarkdown>{proposal.implementation}</ReactMarkdown>
             </div>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Next Steps</h2>
-            <div className="text-gray-700 leading-relaxed text-base">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Next Steps</h2>
+            <div className="text-gray-700 leading-relaxed text-sm sm:text-base">
               <ReactMarkdown>{proposal.nextSteps}</ReactMarkdown>
             </div>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Conclusion</h2>
-            <div className="text-gray-700 leading-relaxed text-base">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Conclusion</h2>
+            <div className="text-gray-700 leading-relaxed text-sm sm:text-base">
               <ReactMarkdown>{proposal.conclusion}</ReactMarkdown>
             </div>
           </section>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-200/60 text-center text-sm text-gray-500">
-          <p className="text-base font-medium mb-1">Generated by SymbioScout - AI-Powered Urban Greening Platform</p>
-          <p className="text-sm">For more information, visit our platform or contact local environmental organizations</p>
+        <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200/60 text-center text-xs sm:text-sm text-gray-500">
+          <p className="text-sm sm:text-base font-medium mb-1">Generated by SymbioScout - AI-Powered Urban Greening Platform</p>
+          <p className="text-xs sm:text-sm">For more information, visit our platform or contact local environmental organizations</p>
         </div>
       </div>
     </div>

@@ -66,24 +66,24 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
   };
 
   return (
-    <div className="glass-effect rounded-3xl shadow-2xl p-8 card-hover">
-        <div className="flex items-center mb-6">
-          <div className="w-12 h-12 bg-gradient-to-br from-purple-400 via-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-            <span className="text-2xl font-bold text-white">1</span>
+    <div className="glass-effect rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 lg:p-8 card-hover">
+        <div className="flex items-center mb-4 sm:mb-6">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-400 via-purple-500 to-violet-600 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg">
+            <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white">1</span>
           </div>
         <div>
-          <h3 className="text-xl font-bold text-gray-900">AI-Powered Site Detection</h3>
-          <p className="text-gray-600 font-medium text-sm">Automatically discover greening opportunities</p>
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900">AI-Powered Site Detection</h3>
+          <p className="text-gray-600 font-medium text-xs sm:text-sm">Automatically discover greening opportunities</p>
           {!detectionCenter && (
-            <p className="text-orange-600 font-medium text-sm mt-1">Click on the map above to set detection center</p>
+            <p className="text-orange-600 font-medium text-xs sm:text-sm mt-1">Click on the map above to set detection center</p>
           )}
           {detectionCenter && (
-            <p className="text-green-600 font-medium text-sm mt-1">Detection center set! Ready to detect sites.</p>
+            <p className="text-green-600 font-medium text-xs sm:text-sm mt-1">Detection center set! Ready to detect sites.</p>
           )}
         </div>
         </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {/* Detection Method Selection */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-3">Detection Method</label>
@@ -92,18 +92,18 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
               { value: 'smart_heuristics', label: 'Self-assign + Smart Heuristics', description: 'Simple rules for fast results' },
               { value: 'openai_vision', label: 'OpenAI Vision (GPT-4V)', description: 'Advanced AI analysis of satellite imagery' }
             ].map((method) => (
-              <label key={method.value} className="flex items-center p-3 rounded-xl border-2 cursor-pointer transition-all hover:border-purple-300">
+              <label key={method.value} className="flex items-start p-3 rounded-xl border-2 cursor-pointer transition-all hover:border-purple-300">
                 <input
                   type="radio"
                   name="detectionMethod"
                   value={method.value}
                   checked={detectionMethod === method.value}
                   onChange={(e) => setDetectionMethod(e.target.value as any)}
-                  className="mr-3 text-purple-600"
+                  className="mr-3 mt-1 text-purple-600"
                 />
                 <div>
-                  <div className="font-medium text-gray-900">{method.label}</div>
-                  <div className="text-sm text-gray-600">{method.description}</div>
+                  <div className="font-medium text-gray-900 text-sm sm:text-base">{method.label}</div>
+                  <div className="text-xs sm:text-sm text-gray-600">{method.description}</div>
                 </div>
               </label>
             ))}
@@ -111,7 +111,7 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
         </div>
 
         {/* Search Parameters */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">Search Radius</label>
             <div className="flex items-center space-x-3">
@@ -122,9 +122,9 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
                 step="100"
                 value={radius}
                 onChange={(e) => setRadius(Number(e.target.value))}
-                className="flex-1"
+                className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
               />
-              <span className="text-sm font-medium text-gray-600 w-20">{radius >= 1000 ? `${(radius/1000).toFixed(1)}km` : `${radius}m`}</span>
+              <span className="text-xs sm:text-sm font-medium text-gray-600 w-16 sm:w-20">{radius >= 1000 ? `${(radius/1000).toFixed(1)}km` : `${radius}m`}</span>
             </div>
           </div>
 
@@ -133,7 +133,7 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
             <select
               value={areaType}
               onChange={(e) => setAreaType(e.target.value as any)}
-              className="w-full p-3 rounded-xl border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+              className="w-full p-3 rounded-xl border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 text-sm sm:text-base"
             >
               <option value="urban">Urban</option>
               <option value="suburban">Suburban</option>
@@ -147,25 +147,25 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
           <button
             onClick={handleAIDetection}
             disabled={isDetecting || !detectionCenter}
-            className="btn-primary py-4 px-8 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
           >
             {isDetecting ? (
-              <div className="flex items-center">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                Analyzing Area...
+              <div className="flex items-center justify-center">
+                <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white mr-2 sm:mr-3"></div>
+                <span className="text-sm sm:text-base">Analyzing Area...</span>
               </div>
             ) : !detectionCenter ? (
-              'Set Detection Center First'
+              <span className="text-sm sm:text-base">Set Detection Center First</span>
             ) : (
-              'Detect Greening Opportunities'
+              <span className="text-sm sm:text-base">Detect Greening Opportunities</span>
             )}
           </button>
         </div>
 
         {/* Info Section */}
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200/60">
-          <h4 className="font-semibold text-blue-800 mb-2">How Smart Heuristics Works</h4>
-          <ul className="text-blue-700 text-sm space-y-1">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-3 sm:p-4 border border-blue-200/60">
+          <h4 className="font-semibold text-blue-800 mb-2 text-sm sm:text-base">How Smart Heuristics Works</h4>
+          <ul className="text-blue-700 text-xs sm:text-sm space-y-1">
             <li>• Analyzes OpenStreetMap data to find gaps between buildings/roads</li>
             <li>• Filters areas between 50-2,000m² with good community access</li>
             <li>• Scores sites based on area, accessibility, and vegetation levels</li>

@@ -192,6 +192,8 @@ body::before {
     0 4px 16px 0 rgba(16, 185, 129, 0.2);
   position: relative;
   overflow: hidden;
+  min-height: 44px; /* Minimum touch target size */
+  touch-action: manipulation; /* Prevent double-tap zoom */
 }
 
 .btn-primary::before {
@@ -230,6 +232,8 @@ body::before {
     0 4px 16px 0 rgba(59, 130, 246, 0.2);
   position: relative;
   overflow: hidden;
+  min-height: 44px; /* Minimum touch target size */
+  touch-action: manipulation; /* Prevent double-tap zoom */
 }
 
 .btn-secondary::before {
@@ -311,4 +315,41 @@ body::before {
 .badge-vine {
   background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
   color: #3730a3;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Improve touch targets */
+  input[type="range"] {
+    height: 8px;
+  }
+  
+  /* Better spacing for mobile */
+  .glass-effect {
+    margin: 0 4px;
+  }
+  
+  /* Improve text readability on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  /* Better button spacing on mobile */
+  .btn-primary, .btn-secondary {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .glass-effect {
+    margin: 0 8px;
+  }
 }

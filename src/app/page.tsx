@@ -116,22 +116,22 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Header */}
       <header className="glass-effect shadow-2xl border-b border-gray-200/50">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-400 via-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-xl">
-                <span className="text-white text-2xl font-bold">S</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
+          <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+            <div className="flex items-center space-x-4 sm:space-x-6 lg:space-x-8">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-green-400 via-green-500 to-emerald-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
+                <span className="text-white text-lg sm:text-xl lg:text-2xl font-bold">S</span>
               </div>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-green-400 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
                   SymbioScout
                 </h1>
-                <p className="text-base text-gray-600 font-medium mt-1">AI-Powered Urban Greening Platform</p>
+                <p className="text-sm sm:text-base text-gray-600 font-medium mt-1">AI-Powered Urban Greening Platform</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4 bg-white/85 rounded-2xl px-6 py-3 backdrop-blur-md border border-gray-200/60 shadow-lg">
-              <span className="text-lg font-semibold text-gray-800">Bangkok, Thailand</span>
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/60"></div>
+            <div className="flex items-center space-x-3 bg-white/85 rounded-xl sm:rounded-2xl px-4 sm:px-6 py-2 sm:py-3 backdrop-blur-md border border-gray-200/60 shadow-lg">
+              <span className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800">Bangkok, Thailand</span>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/60"></div>
             </div>
           </div>
         </div>
@@ -139,8 +139,42 @@ export default function Home() {
 
       {/* Progress Steps */}
       <div className="glass-effect border-b border-gray-200/50">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-10">
-          <div className="flex items-center justify-center space-x-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
+          {/* Mobile: Stacked layout */}
+          <div className="block sm:hidden space-y-3">
+            {[
+              { key: 'map', label: 'Discover', icon: '1' },
+              { key: 'plan', label: 'Plan', icon: '2' },
+              { key: 'impact', label: 'Impact', icon: '3' },
+              { key: 'proposal', label: 'Proposal', icon: '4' }
+            ].map((step, index) => (
+              <div 
+                key={step.key}
+                className={`progress-step cursor-pointer w-full ${
+                  currentStep === step.key 
+                    ? 'active' 
+                    : ['map', 'plan', 'impact'].indexOf(currentStep) > index 
+                      ? 'completed'
+                      : ''
+                }`}
+                onClick={() => {
+                  // Allow navigation to previous steps or current step
+                  if (step.key === 'map' || 
+                      (step.key === 'plan' && selectedSite) ||
+                      (step.key === 'impact' && impactMetrics) ||
+                      (step.key === 'proposal' && impactMetrics)) {
+                    setCurrentStep(step.key as any);
+                  }
+                }}
+              >
+                <span className="text-lg mr-3">{step.icon}</span>
+                <span className="font-bold text-sm">{step.label}</span>
+              </div>
+            ))}
+          </div>
+          
+          {/* Desktop: Horizontal layout */}
+          <div className="hidden sm:flex items-center justify-center space-x-4 lg:space-x-8">
             {[
               { key: 'map', label: 'Discover', icon: '1' },
               { key: 'plan', label: 'Plan', icon: '2' },
@@ -166,11 +200,11 @@ export default function Home() {
                     }
                   }}
                 >
-                  <span className="text-xl mr-3">{step.icon}</span>
-                  <span className="font-bold text-base">{step.label}</span>
+                  <span className="text-lg lg:text-xl mr-2 lg:mr-3">{step.icon}</span>
+                  <span className="font-bold text-sm lg:text-base">{step.label}</span>
                 </div>
                 {index < 3 && (
-                  <div className={`w-20 h-2 mx-8 rounded-full transition-all duration-500 ${
+                  <div className={`w-12 lg:w-20 h-2 mx-4 lg:mx-8 rounded-full transition-all duration-500 ${
                     ['map', 'plan', 'impact', 'proposal'].indexOf(currentStep) > index
                       ? 'bg-gradient-to-r from-green-400 via-emerald-500 to-teal-600 shadow-lg shadow-green-400/30'
                       : 'bg-gray-300/60'
@@ -183,23 +217,23 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
         {currentStep === 'map' && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Map - First (1) */}
-            <div className="glass-effect rounded-3xl shadow-2xl overflow-hidden card-hover">
-                 <div className="p-8 border-b border-gray-200/50">
+            <div className="glass-effect rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden card-hover">
+                 <div className="p-4 sm:p-6 lg:p-8 border-b border-gray-200/50">
                    <div className="flex items-center mb-4">
-                     <div className="w-12 h-12 bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                       <span className="text-2xl font-bold text-white">0</span>
+                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg">
+                       <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white">0</span>
                      </div>
                      <div>
-                       <h2 className="text-2xl font-bold text-gray-900">Discover Greening Opportunities</h2>
-                       <p className="text-gray-600 text-base font-medium mt-1">Click on the map to set detection center, then use AI to find potential greening sites</p>
+                       <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Discover Greening Opportunities</h2>
+                       <p className="text-gray-600 text-sm sm:text-base font-medium mt-1">Click on the map to set detection center, then use AI to find potential greening sites</p>
                      </div>
                    </div>
                  </div>
-              <div className="h-[550px]">
+              <div className="h-[300px] sm:h-[400px] lg:h-[550px]">
                  <MapComponent
                    sites={availableSites}
                    selectedSite={selectedSite}
@@ -220,27 +254,27 @@ export default function Home() {
 
              {/* Available Sites - Second (2) - Only show after AI detection */}
              {availableSites.length > 0 && (
-               <div className="glass-effect rounded-3xl shadow-2xl p-8 card-hover">
-                 <div className="flex items-center mb-8">
-                   <div className="w-12 h-12 bg-gradient-to-br from-green-400 via-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                     <span className="text-2xl font-bold text-white">2</span>
+               <div className="glass-effect rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 lg:p-8 card-hover">
+                 <div className="flex items-center mb-6 sm:mb-8">
+                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-400 via-green-500 to-emerald-600 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg">
+                     <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white">2</span>
                    </div>
-                   <h3 className="text-xl font-bold text-gray-900">Available Sites</h3>
+                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">Available Sites</h3>
                  </div>
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                  {availableSites.map((site) => (
                   <div
                     key={site.id}
                     onClick={() => handleSiteSelect(site)}
-                    className={`p-6 rounded-2xl border-2 cursor-pointer transition-all card-hover ${
+                    className={`p-4 sm:p-6 rounded-xl sm:rounded-2xl border-2 cursor-pointer transition-all card-hover ${
                       selectedSite?.id === site.id
                         ? 'border-green-400 bg-gradient-to-r from-green-50 to-emerald-50 shadow-lg shadow-green-400/20'
                         : 'border-gray-200/60 hover:border-green-400/60 bg-white/85'
                     }`}
                   >
-                    <h4 className="font-bold text-gray-900 text-lg mb-2">{site.name}</h4>
-                    <p className="text-gray-600 font-medium text-base">{site.area}m²</p>
-                    <p className="text-gray-500 text-sm mt-1">{site.currentUse}</p>
+                    <h4 className="font-bold text-gray-900 text-base sm:text-lg mb-2">{site.name}</h4>
+                    <p className="text-gray-600 font-medium text-sm sm:text-base">{site.area}m²</p>
+                    <p className="text-gray-500 text-xs sm:text-sm mt-1">{site.currentUse}</p>
                   </div>
                 ))}
               </div>
@@ -249,20 +283,20 @@ export default function Home() {
 
              {/* Site Details - Third (3) - Separate card below AI detection */}
              {selectedSite && (
-               <div className="glass-effect rounded-3xl shadow-2xl p-8 card-hover">
-                 <div className="flex items-center mb-8">
-                   <div className="w-12 h-12 bg-gradient-to-br from-purple-400 via-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                     <span className="text-2xl font-bold text-white">3</span>
+               <div className="glass-effect rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 lg:p-8 card-hover">
+                 <div className="flex items-center mb-6 sm:mb-8">
+                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-400 via-purple-500 to-violet-600 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg">
+                     <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white">3</span>
                    </div>
-                   <h3 className="text-xl font-bold text-gray-900">Site Details</h3>
+                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">Site Details</h3>
                  </div>
                  <SiteDetails site={selectedSite} />
 
                  {/* Continue Button - Below Site Details */}
-                 <div className="text-center mt-8">
+                 <div className="text-center mt-6 sm:mt-8">
                    <button
                      onClick={handleContinueToPlan}
-                     className="btn-primary py-4 px-8 text-lg"
+                     className="btn-primary py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg w-full sm:w-auto"
                    >
                      Continue to Plant Plan →
                    </button>
@@ -273,11 +307,11 @@ export default function Home() {
         )}
 
         {currentStep === 'plan' && selectedSite && plantingPlan && (
-          <div className="space-y-8">
-            <div className="flex items-center justify-between">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-3 sm:space-y-0">
               <button
                 onClick={() => setCurrentStep('map')}
-                className="btn-secondary py-2 px-4 text-sm"
+                className="btn-secondary py-2 px-4 text-sm w-full sm:w-auto"
               >
                 ← Back to Map
               </button>
@@ -285,15 +319,15 @@ export default function Home() {
                 Step 2 of 4
               </div>
             </div>
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
               {/* Main Plant Recommendations - Takes 2 columns on large screens */}
-              <div className="xl:col-span-2">
-                 <div className="glass-effect rounded-3xl shadow-2xl p-8 card-hover">
-                   <div className="flex items-center mb-6">
-                     <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                       <span className="text-2xl font-bold text-white">2</span>
+              <div className="lg:col-span-2">
+                 <div className="glass-effect rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 lg:p-8 card-hover">
+                   <div className="flex items-center mb-4 sm:mb-6">
+                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg">
+                       <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white">2</span>
                      </div>
-                     <h2 className="text-xl font-bold text-gray-900">AI-Generated Plant Plan</h2>
+                     <h2 className="text-lg sm:text-xl font-bold text-gray-900">AI-Generated Plant Plan</h2>
                    </div>
                   <PlantRecommendations
                     site={selectedSite}
@@ -304,31 +338,30 @@ export default function Home() {
               </div>
               
               {/* Sidebar with Summary and Actions */}
-              <div className="space-y-6">
-                <div className="glass-effect rounded-3xl shadow-2xl p-6 card-hover">
-                  <div className="flex items-center mb-6">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center mr-3 shadow-md">
-                      <span className="text-xl font-bold text-white">S</span>
+              <div className="space-y-4 sm:space-y-6">
+                <div className="glass-effect rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 card-hover">
+                  <div className="flex items-center mb-4 sm:mb-6">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg sm:rounded-xl flex items-center justify-center mr-2 sm:mr-3 shadow-md">
+                      <span className="text-lg sm:text-xl font-bold text-white">S</span>
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900">Planting Summary</h3>
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900">Planting Summary</h3>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {plantingPlan.plants.map(({ plant, quantity }) => (
-                      <div key={plant.id} className="flex justify-between items-center p-4 bg-gradient-to-r from-slate-50 to-gray-50 rounded-xl border border-slate-200/60 shadow-sm">
+                      <div key={plant.id} className="flex justify-between items-center p-3 sm:p-4 bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg sm:rounded-xl border border-slate-200/60 shadow-sm">
                         <div>
-                          <h4 className="font-bold text-gray-900 text-base">{plant.name}</h4>
+                          <h4 className="font-bold text-gray-900 text-sm sm:text-base">{plant.name}</h4>
                           <p className="text-xs text-gray-600 font-medium">{plant.scientificName}</p>
                         </div>
-                        <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-lg font-bold text-sm shadow-md">{quantity}</span>
+                        <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-bold text-xs sm:text-sm shadow-md">{quantity}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-
                 <button
                   onClick={() => setCurrentStep('impact')}
-                  className="w-full btn-primary py-4 px-6 text-lg"
+                  className="w-full btn-primary py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg"
                 >
                   View Impact Analysis →
                 </button>
@@ -338,11 +371,11 @@ export default function Home() {
         )}
 
         {currentStep === 'impact' && impactMetrics && (
-          <div className="space-y-10 animate-fade-in-up">
-            <div className="flex items-center justify-between">
+          <div className="space-y-6 sm:space-y-8 lg:space-y-10 animate-fade-in-up">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-3 sm:space-y-0">
               <button
                 onClick={() => setCurrentStep('plan')}
-                className="btn-secondary py-2 px-4 text-sm"
+                className="btn-secondary py-2 px-4 text-sm w-full sm:w-auto"
               >
                 ← Back to Plant Plan
               </button>
@@ -351,22 +384,21 @@ export default function Home() {
               </div>
             </div>
             <div className="text-center">
-                 <div className="flex items-center justify-center mb-4">
-                   <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                     <span className="text-3xl font-bold text-white">3</span>
+                 <div className="flex flex-col sm:flex-row items-center justify-center mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
+                   <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+                     <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">3</span>
                    </div>
-                   <h2 className="text-2xl font-bold gradient-text">Environmental Impact Analysis</h2>
+                   <h2 className="text-xl sm:text-2xl font-bold gradient-text">Environmental Impact Analysis</h2>
                  </div>
-              <p className="text-gray-600 text-base font-medium">Estimated benefits of your greening project</p>
+              <p className="text-gray-600 text-sm sm:text-base font-medium">Estimated benefits of your greening project</p>
             </div>
             
             <ImpactMetrics metrics={impactMetrics} />
             
-            
             <div className="text-center">
               <button
                 onClick={handleGenerateProposal}
-                className="btn-primary py-4 px-8 text-lg"
+                className="btn-primary py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg w-full sm:w-auto"
               >
                 Generate Community Proposal →
               </button>
