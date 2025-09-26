@@ -75,10 +75,10 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
           <h3 className="text-xl font-bold text-gray-900">AI-Powered Site Detection</h3>
           <p className="text-gray-600 font-medium text-sm">Automatically discover greening opportunities</p>
           {!detectionCenter && (
-            <p className="text-orange-600 font-medium text-sm mt-1">📍 Click on the map above to set detection center</p>
+            <p className="text-orange-600 font-medium text-sm mt-1">Click on the map above to set detection center</p>
           )}
           {detectionCenter && (
-            <p className="text-green-600 font-medium text-sm mt-1">✅ Detection center set! Ready to detect sites.</p>
+            <p className="text-green-600 font-medium text-sm mt-1">Detection center set! Ready to detect sites.</p>
           )}
         </div>
         </div>
@@ -155,9 +155,9 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
                 Analyzing Area...
               </div>
             ) : !detectionCenter ? (
-              '📍 Set Detection Center First'
+              'Set Detection Center First'
             ) : (
-              '🔍 Detect Greening Opportunities'
+              'Detect Greening Opportunities'
             )}
           </button>
         </div>
