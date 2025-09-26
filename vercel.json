@@ -3,9 +3,5 @@
     "src/app/api/**/*.ts": {
       "maxDuration": 30
     }
-  },
-  "env": {
-    "NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN": "@mapbox_token",
-    "OPENAI_API_KEY": "@openai_key"
   }
 }
