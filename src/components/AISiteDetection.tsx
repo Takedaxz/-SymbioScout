@@ -89,7 +89,7 @@ export default function AISiteDetection({ onSitesDetected, onDetectionStart, onD
           <label className="block text-sm font-semibold text-gray-700 mb-3">Detection Method</label>
           <div className="grid grid-cols-1 gap-3">
             {[
-              { value: 'smart_heuristics', label: 'Self-assign + Smart Heuristics', description: 'Fastest, demo-safe. Uses OpenStreetMap data + simple rules' },
+              { value: 'smart_heuristics', label: 'Self-assign + Smart Heuristics', description: 'Simple rules for fast results' },
               { value: 'openai_vision', label: 'OpenAI Vision (GPT-4V)', description: 'Advanced AI analysis of satellite imagery' }
             ].map((method) => (
               <label key={method.value} className="flex items-center p-3 rounded-xl border-2 cursor-pointer transition-all hover:border-purple-300">
